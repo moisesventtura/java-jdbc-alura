@@ -7,28 +7,33 @@ import java.sql.*;
 public class TesteInsercaoComParametro {
 
     public static void main(String[] args) throws SQLException {
-
-
-
-        String nome = "";
-        String descricao = "";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.recuperarConexao();
+        connection.setAutoCommit(false);
         PreparedStatement stm =
                 connection.prepareStatement("INSERT INTO PRODUTO (nome, descricao) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
 
-        stm.setString(1, nome);
-        stm.setString(2, descricao);
+        adicionarVariavel("SmartTv", "45", stm);
+        adicionarVariavel("Radio", "Radio de Bateria", stm);
+    }
 
-        stm.execute();
+        private static void adicionarVariavel(String nome, String descricao, PreparedStatement stm) throws SQLException {
+            stm.setString(1, nome);
+            stm.setString(2, descricao);
 
-        ResultSet rst = stm.getGeneratedKeys();
-        while (rst.next()){
-            Integer id = rst.getInt(1);
-            System.out.println("O id criado foi: " + id);
+//            if(nome.equals("Radio")){
+//                throw new RuntimeException("Não foi possível adicionar o produto");
+//            }
+
+            stm.execute();
+
+            ResultSet rst = stm.getGeneratedKeys();
+            while (rst.next()){
+                Integer id = rst.getInt(1);
+                System.out.println("O id criado foi: " + id);
+            }
+            rst.close();
         }
 
-        rst.close();
     }
-}
 
