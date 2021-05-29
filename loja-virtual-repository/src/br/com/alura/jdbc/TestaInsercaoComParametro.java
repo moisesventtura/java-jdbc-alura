@@ -1,6 +1,8 @@
+package br.com.alura.jdbc;
+
 import java.sql.*;
 
-public class TesteInsercaoComParametro {
+public class TestaInsercaoComParametro {
 
     public static void main(String[] args) throws SQLException {
         ConnectionFactory connectionFactory = new ConnectionFactory();
