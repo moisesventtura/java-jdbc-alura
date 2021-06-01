@@ -9,11 +9,10 @@ import java.util.List;
 
 public class Categoria {
 
-
-    private Connection connection;
     private Integer id;
     private String nome;
-    private String descricao;
+    private List<Produto> produtos = new ArrayList<Produto>();
+
 
     public Categoria(Integer id, String nome) {
         this.id = id;
@@ -35,4 +34,17 @@ public class Categoria {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
+    public void adicionar(Produto produto) {
+        produtos.add(produto);
+    }
+
 }
